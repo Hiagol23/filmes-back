@@ -69,3 +69,52 @@ response.status(resultFilme.status_code)
 response.json(resultFilme)
 
 })
+
+app.get('/v1/controle-filmes/filme', cors(),async function(request, response){
+    //Chama a funcao para retornar os filmes
+    let resultFilme = await controllerFilme.listarFilme()
+
+    response.status(resultFilme.status_code)
+    response.json(resultFilme)
+} )
+
+
+
+app.get('/v1/controle-filmes/filme/:id', cors(), async function (request, response) {
+    //receb eo id da requisica
+    let idFilme = request.params.id
+    
+    let resultFilme = await controllerFilme.buscarFilme(idFilme)
+
+    response.status(resultFilme.status_code)
+    response.json(resultFilme)
+})
+
+app.delete('/v1/controle-filmes/filme/:id', cors(), async function(request, response) {
+    let idFilme = request.params.id
+
+    let resultFilme = await controllerFilme.excluirFilme(idFilme)
+
+    response.status(resultFilme.status_code)
+    response.json(resultFilme)
+})
+
+app.put('/v1/controle-filmes/filme/:id', cors(), bodyParserJSON, async function(request, response){
+
+    //Recebe o content-type da requisição
+    let contentType = request.headers['content-type']
+    //Recebe o ID da requisição
+    let idFilme = request.params.id
+    //Recebe os dados da requisição pelo body 
+    let dadosBody = request.body
+
+    let resultFilme = await controllerFilme.atualizarFilme(idFilme, dadosBody,contentType)
+
+    response.status(resultFilme.status_code)
+    response.json(resultFilme)
+
+})
+
+app.listen('5050', function(){
+    console.log('API funcionando e aguardando requisições .....................................')
+})

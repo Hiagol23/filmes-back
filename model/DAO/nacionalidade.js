@@ -39,7 +39,7 @@ const insertNacionalidade = async function(nacionalidade){
 const updateNacionalidade = async function (nacionalidade) {
     try {
         let sql = `update tbl_nacionalidade set    nacionalidade = '${nacionalidade.nacionalidade}'
-                                where id = ${nacionalidade.id}
+                                where id_nacionalidade = ${nacionalidade.id}
                                 `
 
         let resultNacionalidade = await prisma.$executeRawUnsafe(sql)
@@ -56,7 +56,7 @@ const updateNacionalidade = async function (nacionalidade) {
 //Excluir nacionalidade
 const deleteNacionalidade = async function (id) {
     try {
-        let sql = `delete from tbl_nacionalidade where id = ${id}`
+        let sql = `delete from tbl_nacionalidade where id_nacionalidade = ${id}`
 
         let result = await prisma.$executeRawUnsafe(sql)
 
@@ -73,7 +73,7 @@ const deleteNacionalidade = async function (id) {
 const selectAllNacionalidade = async function () {
 
     try {
-        let sql = 'select * from tbl_nacionalidade order by id desc'
+        let sql = 'select * from tbl_nacionalidade order by id_nacionalidade desc'
         let result = await prisma.$queryRawUnsafe(sql)
 
         if(result)
@@ -88,7 +88,7 @@ const selectAllNacionalidade = async function () {
 //Buscar uma nacionalidade pelo id
 const selectByIdNacionalidade = async function (id) {
     try {
-        let sql = `select * from tbl_nacionalidade where id = ${id}`
+        let sql = `select * from tbl_nacionalidade where id_nacionalidade = ${id}`
 
         let result = await prisma.$queryRawUnsafe(sql)
 

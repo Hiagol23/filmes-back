@@ -278,6 +278,11 @@ app.post('/v1/controle-idioma/idioma', cors(), bodyParserJSON, async function (r
         response.status(resultIdioma.status_code)
         response.json(resultIdioma)
     })
+
+//classificacao
+app.post('/v1/controle-classificacao/classificacao', cors(), bodyParserJSON, async function (request, response){
+    
+})
     
 
 

@@ -59,39 +59,40 @@ const controllerNacionalidade = require('./controller/nacionalidade/controllerNa
 const controllerIdioma = require('./controller/idioma/controllerIdioma')
 
 //FILME
-app.post('/v1/controle-filmes/filme', cors(), bodyParserJSON, async function (request, response){
+app.post('/v1/controle-filmes/filme', cors(), bodyParserJSON, async function(request, response){
+    
+    //Recebe o content type da requisição
+    let contentType = request.headers['content-type']
+    
+    //Recebe do body da requisição os dados encaminhados
+    let dadosBody = request.body
 
-//Recebe o content type da requisição
-let contentType = request.headers['content-type']
+    let resultFilme = await controllerFilme.inserirFilme(dadosBody, contentType)
 
-//Recebe o body da requisição os dados encaminhados
-let  dadosBody = request.body
-let resultFilme = await controllerFilme.inserirFilme(dadosBody, contentType)
-
-response.status(resultFilme.status_code)
-response.json(resultFilme)
-
+    response.status(resultFilme.status_code)
+    response.json(resultFilme)
+    
 })
 
 app.get('/v1/controle-filmes/filme', cors(), async function(request, response){
-    //Chama a funcao para retornar os filmes
+    //chama a função para retornar os filmes
     let resultFilme = await controllerFilme.listarFilme()
 
     response.status(resultFilme.status_code)
     response.json(resultFilme)
-} )
+})
 
-app.get('/v1/controle-filmes/filme/:id', cors(), async function (request, response) {
-    //recebe o id da requisicao+
+app.get('/v1/controle-filmes/filme/:id', cors(), async function(request, response){
+    //Recebe o ID da requisição
     let idFilme = request.params.id
-    
+
     let resultFilme = await controllerFilme.buscarFilme(idFilme)
 
     response.status(resultFilme.status_code)
     response.json(resultFilme)
 })
 
-app.delete('/v1/controle-filmes/filme/:id', cors(), async function(request, response) {
+app.delete('/v1/controle-filmes/filme/:id', cors(), async function(request, response){
     let idFilme = request.params.id
 
     let resultFilme = await controllerFilme.excluirFilme(idFilme)
@@ -106,13 +107,14 @@ app.put('/v1/controle-filmes/filme/:id', cors(), bodyParserJSON, async function(
     let contentType = request.headers['content-type']
     //Recebe o ID da requisição
     let idFilme = request.params.id
-    //Recebe os dados da requisição pelo body 
+    //Recebe os dados da requisição pelo body
     let dadosBody = request.body
 
-    let resultFilme = await controllerFilme.atualizarFilme(idFilme, dadosBody,contentType)
+    let resultFilme = await controllerFilme.atualizarFilme(idFilme, dadosBody, contentType)
 
     response.status(resultFilme.status_code)
     response.json(resultFilme)
+
 })
 
 
@@ -225,64 +227,7 @@ app.post('/v1/controle-nacionalidade/nacionalidade', cors(), bodyParserJSON, asy
         response.json(resultNacionalidade)
     })
 
-//IDIOMA
-app.post('/v1/controle-idioma/idioma', cors(), bodyParserJSON, async function (request, response){
 
-    let contentType = request.headers['content-type']
-    
-    let dadosBody = request.body
-    let resultIdioma = await controllerIdioma.inserirIdioma(dadosBody, contentType)
-    
-    response.status(resultIdioma.status_code)
-    response.json(resultIdioma)
-    
-    })
-    
-    app.get('/v1/controle-idioma/idioma', cors(), async function(request, response){
-    
-        let resultIdioma = await controllerIdioma.listarIdiomas()
-    
-        response.status(resultIdioma.status_code)
-        response.json(resultIdioma)
-    })
-    
-    app.get('/v1/controle-idioma/idioma/:id', cors(), async function (request, response) {
-        
-        let idIdioma = request.params.id
-        
-        let resultIdioma = await controllerIdioma.buscarIdioma(idIdioma)
-    
-        response.status(resultIdioma.status_code)
-        response.json(resultIdioma)
-    })
-    
-    app.delete('/v1/controle-idioma/idioma/:id', cors(), async function(request, response) {
-        let idIdioma = request.params.id
-    
-        let resultIdioma = await controllerIdioma.excluirIdioma(idIdioma)
-    
-        response.status(resultIdioma.status_code)
-        response.json(resultIdioma)
-    })
-    
-    app.put('/v1/controle-idioma/idioma/:id', cors(), bodyParserJSON, async function(request, response){
-    
-        let contentType = request.headers['content-type']
-        
-        let idIdioma = request.params.id
-        
-        let dadosBody = request.body
-    
-        let resultIdioma = await controllerIdioma.atualizarIdioma(idIdioma, dadosBody,contentType)
-    
-        response.status(resultIdioma.status_code)
-        response.json(resultIdioma)
-    })
-
-//classificacao
-app.post('/v1/controle-classificacao/classificacao', cors(), bodyParserJSON, async function (request, response){
-    
-})
     
 
 

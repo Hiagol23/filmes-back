@@ -42,9 +42,9 @@ const insertClassificacao = async function(classificacao){
 //Função para atualizar um classificacao existente
 const updateClassificacao = async function(classificacao){
   try {
-      let sql = `update tbl_classificacao set     sigla             = '${classificacao.nome}',
-                                                  nome              = '${classificacao.duracao}',
-                                                  descricao         = '${classificacao.sinopse}'
+      let sql = `update tbl_classificacao set     sigla             = '${classificacao.sigla}',
+                                                  nome              = '${classificacao.nome}',
+                                                  descricao         = '${classificacao.descricao}'
                                             where id = ${classificacao.id}                
                             `
       let resultclassificacao = await prisma.$executeRawUnsafe(sql)
@@ -116,4 +116,4 @@ module.exports = {
     deleteClassificacao,
     selectAllClassificacao,
     selectByIdClassificacao
-} 
+}

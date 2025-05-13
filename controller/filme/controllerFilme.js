@@ -1,7 +1,7 @@
 /**********************************************************************************
  * Objetivo: Controller responsável pela regra de negócio referente ao CRUD de Filme
  * Data: 11/02/2025
- * Autor: Hiago
+ * Autor: Marcel
  * Versão: 1.0
  **********************************************************************************/
 

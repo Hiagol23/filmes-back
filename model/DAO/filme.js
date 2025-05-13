@@ -1,7 +1,7 @@
 /*******************************************************************************************************
  * Objetivo: Criar a comunicação com o Banco de Dados para fazer o CRUD de filmes
  * Data: 11/02/2025
- * Autor: Hiago
+ * Autor: Marcel
  * Versão: 1.0
  ******************************************************************************************************/
 //import da biblioteca do prisma client para executar os scripts SQL
